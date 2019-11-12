@@ -1,0 +1,6 @@
+[S][T][O][R][M]
+[S]Simple
+[T]Terra
+[O]Or
+[R]Radiant
+[M]Modifications

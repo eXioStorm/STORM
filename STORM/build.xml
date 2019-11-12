@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="STORM" default="dist" basedir=".">
+
+	<property name="src" location="src/Main/" />
+	<property name="build" location="build" />
+	<property name="dist" location="dist" />
+	<path id="compile.classpath">
+	        <fileset dir="${basedir}/libs">
+	           <include name="**/*.jar"/>
+	        </fileset>
+	    </path>
+
+	<target name="deleteFile">
+		<delete file="${dist}/lib/${ant.project.name}-1.0[1.14].jar" />
+		<delete file="${dist}/src/${ant.project.name}-1.0[1.14].jar" />
+	</target>
+	<target name="init">
+		<!-- Create the time stamp -->
+		<tstamp />
+		<!-- Create the build directory structure used by compile -->
+		<mkdir dir="${build}" />
+		<mkdir dir="${dist}" />
+		<mkdir dir="${dist}/src/" />
+		<mkdir dir="${dist}/lib/" />
+	</target>
+	<target name="compile" depends="init" description="compile the source">
+		<!-- Compile the java code from ${src} into ${build} -->
+		<copy file="config.yml" todir="${build}"/>
+		<copy file="plugin.yml" todir="${build}"/>
+		<javac includeantruntime="false" srcdir="${src}" destdir="${build}" classpathref="compile.classpath"></javac>
+		<jar destfile="${dist}/src/[1.14]${ant.project.name}-1.0.jar">
+			<fileset dir="${src}"></fileset>
+            <fileset file="plugin.yml"></fileset>
+			<fileset file="config.yml"></fileset>
+				</jar>
+		
+	</target>
+	<target name="dist" depends="compile" description="generate the distribution">
+		<buildnumber />
+		<!-- Create the distribution directory -->
+		<mkdir dir="${dist}/lib" />
+		<jar destfile="${dist}/lib/[1.14]${ant.project.name}-1.0.jar">
+			<fileset dir="${build}"></fileset>
+		</jar>
+	</target>
+</project>
