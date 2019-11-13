@@ -6,10 +6,10 @@
 # STORM
 Spigot plugin for my customized private minecraft server!
 ## workflow progress
-* ~~[Mushroom Island]()~~
+* [Mushroom Island]()
   * ~~custom giant brown mushroom~~
   * ~~custom giant red mushroom~~
 
 ## Other ToDos
-* ~~[Mushroom Island]()~~
-  * ~~outline island with glowstone blocks under water~~
+* [Mushroom Island]()
+  * outline island with glowstone blocks under water
