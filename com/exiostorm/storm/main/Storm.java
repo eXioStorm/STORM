@@ -25,6 +25,8 @@ public class Storm extends JavaPlugin {
 		this.getConfig().options().copyDefaults(true);
         this.saveConfig();
         this.getCommand("stormtest").setExecutor((CommandExecutor)new StormCommands(this));
+        this.getCommand("bmush").setExecutor((CommandExecutor)new StormCommands(this));
+        this.getCommand("rmush").setExecutor((CommandExecutor)new StormCommands(this));
 		//new StormCommands(this);
         new StormBuilder(this);
 		new StructureListener(this);

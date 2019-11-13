@@ -27,7 +27,25 @@ public class StormCommands implements CommandExecutor {
 			}
 			 p.sendMessage("And it's windy weather, boys, stormy weather, boys\nWhen the wind blows, we're all together, boys;\nBlow ye winds westerly, blow ye winds, blow\nJolly sou'wester, boys, steady she goes");
 			//RedMushroomMod.genRedMush(p.getServer().getPlayer(p.getName()).getTargetBlockExact(1000).getLocation().add(0, 1, 0).getBlock().getLocation());
-			 BrownMushroomMod.genBrownMush(p.getServer().getPlayer(p.getName()).getTargetBlockExact(1000).getLocation().add(0, 1, 0).getBlock().getLocation());
+			//BrownMushroomMod.genBrownMush(p.getServer().getPlayer(p.getName()).getTargetBlockExact(1000).getLocation().add(0, 1, 0).getBlock().getLocation());
+			return true;
+		}
+		if (cmd.getName().equalsIgnoreCase("bmush")) {
+			CommandSender p = (Player) sender;
+			if (!p.hasPermission("storm.bmush")) {
+				p.sendMessage("You must not be Storm! please elevate your permissions!");
+				return true;
+			}
+			BrownMushroomMod.genBrownMush(p.getServer().getPlayer(p.getName()).getTargetBlockExact(1000).getLocation().add(0, 1, 0).getBlock().getLocation());
+			return true;
+		}
+		if (cmd.getName().equalsIgnoreCase("rmush")) {
+			CommandSender p = (Player) sender;
+			if (!p.hasPermission("storm.rmush")) {
+				p.sendMessage("You must not be Storm! please elevate your permissions!");
+				return true;
+			}
+			RedMushroomMod.genRedMush(p.getServer().getPlayer(p.getName()).getTargetBlockExact(1000).getLocation().add(0, 1, 0).getBlock().getLocation());
 			return true;
 		}
 		return true;
