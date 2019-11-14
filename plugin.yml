@@ -10,3 +10,25 @@ commands:
        usage: /stormtest
        permission: storm.test
        permission-message: You must not be Storm! please elevate your permissions!
+    bmush:
+       description: generate a giant brown mushroom
+       usage: /bmush
+       permission: storm.bmush
+       permission-message: You must not be Storm! please elevate your permissions!
+       
+    rmush:
+       description: generate a giant red mushroom
+       usage: /rmush
+       permission: storm.rmush
+       permission-message: You must not be Storm! please elevate your permissions!
+    lmush:
+       description: convert regular giant mushroom to a lit mushroom
+       usage: /lmush
+       permission: storm.lmush
+       permission-message: You must not be Storm! please elevate your permissions!
+    lshore:
+       description: illuminate shoreline
+       usage: /lshore
+       permission: storm.lshore
+       permission-message: You must not be Storm! please elevate your permissions!
+       

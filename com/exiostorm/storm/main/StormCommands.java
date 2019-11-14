@@ -7,6 +7,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.exiostorm.storm.mods.structures.BrownMushroomMod;
+import com.exiostorm.storm.mods.structures.IlluminateShore;
+import com.exiostorm.storm.mods.structures.MushroomConverter;
 import com.exiostorm.storm.mods.structures.RedMushroomMod;
 
 public class StormCommands implements CommandExecutor {
@@ -46,6 +48,24 @@ public class StormCommands implements CommandExecutor {
 				return true;
 			}
 			RedMushroomMod.genRedMush(p.getServer().getPlayer(p.getName()).getTargetBlockExact(1000).getLocation().add(0, 1, 0).getBlock().getLocation());
+			return true;
+		}
+		if (cmd.getName().equalsIgnoreCase("lmush")) {
+			CommandSender p = (Player) sender;
+			if (!p.hasPermission("storm.lmush")) {
+				p.sendMessage("You must not be Storm! please elevate your permissions!");
+				return true;
+			}
+			MushroomConverter.convertStem(p.getServer().getPlayer(p.getName()).getTargetBlockExact(1000).getLocation().getBlock().getLocation());
+			return true;
+		}
+		if (cmd.getName().equalsIgnoreCase("lshore")) {
+			CommandSender p = (Player) sender;
+			if (!p.hasPermission("storm.lshore")) {
+				p.sendMessage("You must not be Storm! please elevate your permissions!");
+				return true;
+			}
+			IlluminateShore.Scan(p.getServer().getPlayer(p.getName()).getTargetBlockExact(1000).getLocation().getBlock().getLocation());
 			return true;
 		}
 		return true;

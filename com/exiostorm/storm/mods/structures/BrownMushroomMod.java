@@ -7,18 +7,18 @@ import com.exiostorm.storm.main.StormBuilder;
 
 public class BrownMushroomMod {
 	private static int h = 0;
-	private static double x = 0;
-	private static double y = 0;
-	private static double z = 0;
+	private static int x = 0;
+	private static int y = 0;
+	private static int z = 0;
 	private static Location genLoc;
 	public BrownMushroomMod() {
 	}
 
 	public static void genBrownMush(Location pos) {
 		genLoc = pos;
-		x = genLoc.getX();
-		y = genLoc.getY();
-		z = genLoc.getZ();
+		x = genLoc.getBlockX();
+		y = genLoc.getBlockY();
+		z = genLoc.getBlockZ();
 		Material mat = Material.BROWN_MUSHROOM_BLOCK;
 		h = 0;
 		h = generateHeight();
