@@ -29,6 +29,7 @@ public class Storm extends JavaPlugin {
         this.getCommand("rmush").setExecutor((CommandExecutor)new StormCommands(this));
         this.getCommand("lmush").setExecutor((CommandExecutor)new StormCommands(this));
         this.getCommand("lshore").setExecutor((CommandExecutor)new StormCommands(this));
+        this.getCommand("cvbmush").setExecutor((CommandExecutor)new StormCommands(this));
 		//new StormCommands(this);
         new StormBuilder(this);
 		new StructureListener(this);

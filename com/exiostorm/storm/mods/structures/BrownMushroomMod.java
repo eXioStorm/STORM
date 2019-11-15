@@ -6,36 +6,40 @@ import org.bukkit.Material;
 import com.exiostorm.storm.main.StormBuilder;
 
 public class BrownMushroomMod {
-	private static int h = 0;
-	private static int x = 0;
-	private static int y = 0;
-	private static int z = 0;
-	private static Location genLoc;
+	//private static int h = 0;
+	//private static int x = 0;
+	//private static int y = 0;
+	//private static int z = 0;
+	//private static Location genLoc;
 	public BrownMushroomMod() {
 	}
 
 	public static void genBrownMush(Location pos) {
+		Location genLoc = pos;
+		int x = genLoc.getBlockX();
+		int y = genLoc.getBlockY();
+		int z = genLoc.getBlockZ();
 		genLoc = pos;
-		x = genLoc.getBlockX();
-		y = genLoc.getBlockY();
-		z = genLoc.getBlockZ();
 		Material mat = Material.BROWN_MUSHROOM_BLOCK;
-		h = 0;
+		int h = 0;
 		h = generateHeight();
 		h = checkHeightClearance(genLoc, 4, h);
-		GenMushroomStem(genLoc, h);
+		GenMushroomStem(mat, x, y, z, h, genLoc);
 		genLoc = pos;
+		GenMushroomCap(mat, x, y, z, h, genLoc);
+	}
+	public static void GenMushroomCap(Material mat, int x, int y, int z, int h, Location loc) {
 		//top layer
 		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-		StormBuilder.setBlock(mat, x, (y+h+1), z, genLoc, 2, 1, 2, true);//top middle of cap
-		StormBuilder.setBlock(mat, x, (y+h+1), (z+1), genLoc, 2, 1, 1, true);//south middle edge of cap(top)
-		StormBuilder.setBlock(mat, x, (y+h+1), (z-1), genLoc, 2, 1, -1, true);//north middle edge of cap(top)
-		StormBuilder.setBlock(mat, (x+1), (y+h+1), z, genLoc, 1, 1, 2, true);//east middle edge of cap(top)
-		StormBuilder.setBlock(mat, (x-1), (y+h+1), z, genLoc, -1, 1, 2, true);//west middle edge of cap(top)
-		StormBuilder.setBlock(mat, (x+1), (y+h+1), (z+1), genLoc, 1, 1, 1, true);//south east corner of cap(top)
-		StormBuilder.setBlock(mat, (x+1), (y+h+1), (z-1), genLoc, 1, 1, -1, true);//north east corner of cap(top)
-		StormBuilder.setBlock(mat, (x-1), (y+h+1), (z+1), genLoc, -1, 1, 1, true);//south west corner of cap(top)
-		StormBuilder.setBlock(mat, (x-1), (y+h+1), (z-1), genLoc, -1, 1, -1, true);//north west corner of cap(top)
+		StormBuilder.setBlock(mat, x, (y+h+1), z, loc, 2, 1, 2, true);//top middle of cap
+		StormBuilder.setBlock(mat, x, (y+h+1), (z+1), loc, 2, 1, 1, true);//south middle edge of cap(top)
+		StormBuilder.setBlock(mat, x, (y+h+1), (z-1), loc, 2, 1, -1, true);//north middle edge of cap(top)
+		StormBuilder.setBlock(mat, (x+1), (y+h+1), z, loc, 1, 1, 2, true);//east middle edge of cap(top)
+		StormBuilder.setBlock(mat, (x-1), (y+h+1), z, loc, -1, 1, 2, true);//west middle edge of cap(top)
+		StormBuilder.setBlock(mat, (x+1), (y+h+1), (z+1), loc, 1, 1, 1, true);//south east corner of cap(top)
+		StormBuilder.setBlock(mat, (x+1), (y+h+1), (z-1), loc, 1, 1, -1, true);//north east corner of cap(top)
+		StormBuilder.setBlock(mat, (x-1), (y+h+1), (z+1), loc, -1, 1, 1, true);//south west corner of cap(top)
+		StormBuilder.setBlock(mat, (x-1), (y+h+1), (z-1), loc, -1, 1, -1, true);//north west corner of cap(top)
 		//top of side cap edges
 		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		/* 12 corner blocks
@@ -45,99 +49,101 @@ public class BrownMushroomMod {
 		 */
 		//corners?
 		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-		StormBuilder.setBlock(mat, (x+3), (y+h), (z+2), genLoc, 1, 0, 1, true);//south east corner of cap(2nd layer down)
-		StormBuilder.setBlock(mat, (x-3), (y+h), (z-2), genLoc, -1, 0, -1, true);//north west corner of cap(2nd layer down)
-		StormBuilder.setBlock(mat, (x-3), (y+h), (z+2), genLoc, -1, 0, 1, true);//south west corner of cap(2nd layer down)
-		StormBuilder.setBlock(mat, (x+3), (y+h), (z-2), genLoc, 1, 0, -1, true);//north east corner of cap(2nd layer down)
+		StormBuilder.setBlock(mat, (x+3), (y+h), (z+2), loc, 1, 0, 1, true);//south east corner of cap(2nd layer down)
+		StormBuilder.setBlock(mat, (x-3), (y+h), (z-2), loc, -1, 0, -1, true);//north west corner of cap(2nd layer down)
+		StormBuilder.setBlock(mat, (x-3), (y+h), (z+2), loc, -1, 0, 1, true);//south west corner of cap(2nd layer down)
+		StormBuilder.setBlock(mat, (x+3), (y+h), (z-2), loc, 1, 0, -1, true);//north east corner of cap(2nd layer down)
 		//^^^^^^^^^^^^^^^^^^^^^^
-		StormBuilder.setBlock(mat, (x+2), (y+h), (z+3), genLoc, 1, 0, 1, true);//south east corner of cap(2nd layer down)
-		StormBuilder.setBlock(mat, (x-2), (y+h), (z-3), genLoc, -1, 0, -1, true);//north west corner of cap(2nd layer down)
-		StormBuilder.setBlock(mat, (x-2), (y+h), (z+3), genLoc, -1, 0, 1, true);//south west corner of cap(2nd layer down)
-		StormBuilder.setBlock(mat, (x+2), (y+h), (z-3), genLoc, 1, 0, -1, true);//north east corner of cap(2nd layer down)
+		StormBuilder.setBlock(mat, (x+2), (y+h), (z+3), loc, 1, 0, 1, true);//south east corner of cap(2nd layer down)
+		StormBuilder.setBlock(mat, (x-2), (y+h), (z-3), loc, -1, 0, -1, true);//north west corner of cap(2nd layer down)
+		StormBuilder.setBlock(mat, (x-2), (y+h), (z+3), loc, -1, 0, 1, true);//south west corner of cap(2nd layer down)
+		StormBuilder.setBlock(mat, (x+2), (y+h), (z-3), loc, 1, 0, -1, true);//north east corner of cap(2nd layer down)
 		//^^^^^^^^^^^^^^^^^^^^^^
 		//###########
-		StormBuilder.setBlock(mat, (x+2), (y+h-1), (z+1), genLoc, 1, -1, 1, true);//south east corner of cap(3rd layer down)
-		StormBuilder.setBlock(mat, (x-2), (y+h-1), (z-1), genLoc, -1, -1, -1, true);//north west corner of cap(3rd layer down)
-		StormBuilder.setBlock(mat, (x-2), (y+h-1), (z+1), genLoc, -1, -1, 1, true);//south west corner of cap(3rd layer down)
-		StormBuilder.setBlock(mat, (x+2), (y+h-1), (z-1), genLoc, 1, -1, -1, true);//north east corner of cap(3rd layer down)
+		StormBuilder.setBlock(mat, (x+2), (y+h-1), (z+1), loc, 1, -1, 1, true);//south east corner of cap(3rd layer down)
+		StormBuilder.setBlock(mat, (x-2), (y+h-1), (z-1), loc, -1, -1, -1, true);//north west corner of cap(3rd layer down)
+		StormBuilder.setBlock(mat, (x-2), (y+h-1), (z+1), loc, -1, -1, 1, true);//south west corner of cap(3rd layer down)
+		StormBuilder.setBlock(mat, (x+2), (y+h-1), (z-1), loc, 1, -1, -1, true);//north east corner of cap(3rd layer down)
 		//###########
 		//edges
 		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-		StormBuilder.setBlock(mat, (x), (y+h), (z+3), genLoc, 2, 0, 1, true);//south middle edge of cap(2nd layer down)
-		StormBuilder.setBlock(mat, (x), (y+h), (z-3), genLoc, 2, 0, -1, true);//north middle edge of cap(2nd layer down)
-		StormBuilder.setBlock(mat, (x+3), (y+h), (z), genLoc, 1, 0, 2, true);//east middle edge of cap(2nd layer down)
-		StormBuilder.setBlock(mat, (x-3), (y+h), (z), genLoc, -1, 0, 2, true);//west middle edge of cap(2nd layer down)
+		StormBuilder.setBlock(mat, (x), (y+h), (z+3), loc, 2, 0, 1, true);//south middle edge of cap(2nd layer down)
+		StormBuilder.setBlock(mat, (x), (y+h), (z-3), loc, 2, 0, -1, true);//north middle edge of cap(2nd layer down)
+		StormBuilder.setBlock(mat, (x+3), (y+h), (z), loc, 1, 0, 2, true);//east middle edge of cap(2nd layer down)
+		StormBuilder.setBlock(mat, (x-3), (y+h), (z), loc, -1, 0, 2, true);//west middle edge of cap(2nd layer down)
 		//###########
-		StormBuilder.setBlock(mat, (x+1), (y+h), (z+3), genLoc, 2, 0, 1, true);//south east middle edge of cap(2nd layer down)
-		StormBuilder.setBlock(mat, (x+1), (y+h), (z-3), genLoc, 2, 0, -1, true);//north east middle edge of cap(2nd layer down)
-		StormBuilder.setBlock(mat, (x+3), (y+h), (z+1), genLoc, 1, 0, 2, true);//south east middle edge of cap(2nd layer down)
-		StormBuilder.setBlock(mat, (x-3), (y+h), (z+1), genLoc, -1, 0, 2, true);//south west middle edge of cap(2nd layer down)
+		StormBuilder.setBlock(mat, (x+1), (y+h), (z+3), loc, 2, 0, 1, true);//south east middle edge of cap(2nd layer down)
+		StormBuilder.setBlock(mat, (x+1), (y+h), (z-3), loc, 2, 0, -1, true);//north east middle edge of cap(2nd layer down)
+		StormBuilder.setBlock(mat, (x+3), (y+h), (z+1), loc, 1, 0, 2, true);//south east middle edge of cap(2nd layer down)
+		StormBuilder.setBlock(mat, (x-3), (y+h), (z+1), loc, -1, 0, 2, true);//south west middle edge of cap(2nd layer down)
 		//###########
-		StormBuilder.setBlock(mat, (x-1), (y+h), (z+3), genLoc, 2, 0, 1, true);//south west middle edge of cap(2nd layer down)
-		StormBuilder.setBlock(mat, (x-1), (y+h), (z-3), genLoc, 2, 0, -1, true);//north west middle edge of cap(2nd layer down)
-		StormBuilder.setBlock(mat, (x+3), (y+h), (z-1), genLoc, 1, 0, 2, true);//north east middle edge of cap(2nd layer down)
-		StormBuilder.setBlock(mat, (x-3), (y+h), (z-1), genLoc, -1, 0, 2, true);//north west middle edge of cap(2nd layer down)
+		StormBuilder.setBlock(mat, (x-1), (y+h), (z+3), loc, 2, 0, 1, true);//south west middle edge of cap(2nd layer down)
+		StormBuilder.setBlock(mat, (x-1), (y+h), (z-3), loc, 2, 0, -1, true);//north west middle edge of cap(2nd layer down)
+		StormBuilder.setBlock(mat, (x+3), (y+h), (z-1), loc, 1, 0, 2, true);//north east middle edge of cap(2nd layer down)
+		StormBuilder.setBlock(mat, (x-3), (y+h), (z-1), loc, -1, 0, 2, true);//north west middle edge of cap(2nd layer down)
 		//###########
 		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		//filler
 		//&&&&&&&&&&&&&&&&&&&&&&
 		//"corners"
-		StormBuilder.setBlock(mat, (x+2), (y+h), (z+2), genLoc, 2, 0, 2, true);//south east corner of cap(2nd layer down)
-		StormBuilder.setBlock(mat, (x-2), (y+h), (z-2), genLoc, 2, 0, 2, true);//north west corner of cap(2nd layer down)
-		StormBuilder.setBlock(mat, (x-2), (y+h), (z+2), genLoc, 2, 0, 2, true);//south west corner of cap(2nd layer down)
-		StormBuilder.setBlock(mat, (x+2), (y+h), (z-2), genLoc, 2, 0, 2, true);//north east corner of cap(2nd layer down)
+		StormBuilder.setBlock(mat, (x+2), (y+h), (z+2), loc, 2, 0, 2, true);//south east corner of cap(2nd layer down)
+		StormBuilder.setBlock(mat, (x-2), (y+h), (z-2), loc, 2, 0, 2, true);//north west corner of cap(2nd layer down)
+		StormBuilder.setBlock(mat, (x-2), (y+h), (z+2), loc, 2, 0, 2, true);//south west corner of cap(2nd layer down)
+		StormBuilder.setBlock(mat, (x+2), (y+h), (z-2), loc, 2, 0, 2, true);//north east corner of cap(2nd layer down)
 		//^^^^^^^^^^^^^^^^^^^^^^
-		//StormBuilder.setBlock(mat, (x+2), (y+h-1), (z+2), genLoc, 2, -1, 2);//south east corner of cap(2nd layer down)
-		//StormBuilder.setBlock(mat, (x-2), (y+h-1), (z-2), genLoc, 2, -1, 2);//north west corner of cap(2nd layer down)
-		//StormBuilder.setBlock(mat, (x-2), (y+h-1), (z+2), genLoc, 2, -1, 2);//south west corner of cap(2nd layer down)
-		//StormBuilder.setBlock(mat, (x+2), (y+h-1), (z-2), genLoc, 2, -1, 2);//north east corner of cap(2nd layer down)
+		//StormBuilder.setBlock(mat, (x+2), (y+h-1), (z+2), loc, 2, -1, 2);//south east corner of cap(2nd layer down)
+		//StormBuilder.setBlock(mat, (x-2), (y+h-1), (z-2), loc, 2, -1, 2);//north west corner of cap(2nd layer down)
+		//StormBuilder.setBlock(mat, (x-2), (y+h-1), (z+2), loc, 2, -1, 2);//south west corner of cap(2nd layer down)
+		//StormBuilder.setBlock(mat, (x+2), (y+h-1), (z-2), loc, 2, -1, 2);//north east corner of cap(2nd layer down)
 		//^^^^^^^^^^^^^^^^^^^^^^
 		//##########
-		StormBuilder.setBlock(mat, (x), (y+h), (z+2), genLoc, 2, 1, 2, true);//south middle edge of cap(2nd layer down)
-		StormBuilder.setBlock(mat, (x), (y+h), (z-2), genLoc, 2, 1, 2, true);//north middle edge of cap(2nd layer down)
-		StormBuilder.setBlock(mat, (x+2), (y+h), (z), genLoc, 2, 1, 2, true);//east middle edge of cap(2nd layer down)
-		StormBuilder.setBlock(mat, (x-2), (y+h), (z), genLoc, 2, 1, 2, true);//west middle edge of cap(2nd layer down)
+		StormBuilder.setBlock(mat, (x), (y+h), (z+2), loc, 2, 1, 2, true);//south middle edge of cap(2nd layer down)
+		StormBuilder.setBlock(mat, (x), (y+h), (z-2), loc, 2, 1, 2, true);//north middle edge of cap(2nd layer down)
+		StormBuilder.setBlock(mat, (x+2), (y+h), (z), loc, 2, 1, 2, true);//east middle edge of cap(2nd layer down)
+		StormBuilder.setBlock(mat, (x-2), (y+h), (z), loc, 2, 1, 2, true);//west middle edge of cap(2nd layer down)
 		//###########
-		StormBuilder.setBlock(mat, (x+1), (y+h), (z+2), genLoc, 2, 1, 1, true);//south east middle edge of cap(2nd layer down)
-		StormBuilder.setBlock(mat, (x+1), (y+h), (z-2), genLoc, 2, 1, -1, true);//north east middle edge of cap(2nd layer down)
-		StormBuilder.setBlock(mat, (x+2), (y+h), (z+1), genLoc, 2, 1, 2, true);//south east middle edge of cap(2nd layer down)
-		StormBuilder.setBlock(mat, (x-2), (y+h), (z+1), genLoc, 2, 1, 2, true);//south west middle edge of cap(2nd layer down)
+		StormBuilder.setBlock(mat, (x+1), (y+h), (z+2), loc, 2, 1, 1, true);//south east middle edge of cap(2nd layer down)
+		StormBuilder.setBlock(mat, (x+1), (y+h), (z-2), loc, 2, 1, -1, true);//north east middle edge of cap(2nd layer down)
+		StormBuilder.setBlock(mat, (x+2), (y+h), (z+1), loc, 2, 1, 2, true);//south east middle edge of cap(2nd layer down)
+		StormBuilder.setBlock(mat, (x-2), (y+h), (z+1), loc, 2, 1, 2, true);//south west middle edge of cap(2nd layer down)
 		//###########
-		StormBuilder.setBlock(mat, (x-1), (y+h), (z+2), genLoc, 2, 1, 2, true);//south west middle edge of cap(2nd layer down)
-		StormBuilder.setBlock(mat, (x-1), (y+h), (z-2), genLoc, 2, 1, 2, true);//north west middle edge of cap(2nd layer down)
-		StormBuilder.setBlock(mat, (x+2), (y+h), (z-1), genLoc, 2, 1, 2, true);//north east middle edge of cap(2nd layer down)
-		StormBuilder.setBlock(mat, (x-2), (y+h), (z-1), genLoc, 2, 1, 2, true);//north west middle edge of cap(2nd layer down)
+		StormBuilder.setBlock(mat, (x-1), (y+h), (z+2), loc, 2, 1, 2, true);//south west middle edge of cap(2nd layer down)
+		StormBuilder.setBlock(mat, (x-1), (y+h), (z-2), loc, 2, 1, 2, true);//north west middle edge of cap(2nd layer down)
+		StormBuilder.setBlock(mat, (x+2), (y+h), (z-1), loc, 2, 1, 2, true);//north east middle edge of cap(2nd layer down)
+		StormBuilder.setBlock(mat, (x-2), (y+h), (z-1), loc, 2, 1, 2, true);//north west middle edge of cap(2nd layer down)
 		//###########
 		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-		StormBuilder.setBlock(mat, (x), (y+h-1), (z+2), genLoc, 2, -1, 1, true);//south middle edge of cap(3rd layer down)
-		StormBuilder.setBlock(mat, (x), (y+h-1), (z-2), genLoc, 2, -1, -1, true);//north middle edge of cap(3rd layer down)
-		StormBuilder.setBlock(mat, (x+2), (y+h-1), (z), genLoc, 1, -1, 2, true);//east middle edge of cap(3rd layer down)
-		StormBuilder.setBlock(mat, (x-2), (y+h-1), (z), genLoc, -1, -1, 2, true);//west middle edge of cap(3rd layer down)
+		StormBuilder.setBlock(mat, (x), (y+h-1), (z+2), loc, 2, -1, 1, true);//south middle edge of cap(3rd layer down)
+		StormBuilder.setBlock(mat, (x), (y+h-1), (z-2), loc, 2, -1, -1, true);//north middle edge of cap(3rd layer down)
+		StormBuilder.setBlock(mat, (x+2), (y+h-1), (z), loc, 1, -1, 2, true);//east middle edge of cap(3rd layer down)
+		StormBuilder.setBlock(mat, (x-2), (y+h-1), (z), loc, -1, -1, 2, true);//west middle edge of cap(3rd layer down)
 		//###########
-		StormBuilder.setBlock(mat, (x+1), (y+h-1), (z+2), genLoc, 1, -1, 1, true);//south east middle edge of cap(3rd layer down)
-		StormBuilder.setBlock(mat, (x+1), (y+h-1), (z-2), genLoc, 1, -1, -1, true);//north east middle edge of cap(3rd layer down)
-		StormBuilder.setBlock(mat, (x+2), (y+h-1), (z+1), genLoc, 1, -1, 1, true);//south east middle edge of cap(3rd layer down)
-		StormBuilder.setBlock(mat, (x-2), (y+h-1), (z+1), genLoc, -1, -1, 1, true);//south west middle edge of cap(3rd layer down)
+		StormBuilder.setBlock(mat, (x+1), (y+h-1), (z+2), loc, 1, -1, 1, true);//south east middle edge of cap(3rd layer down)
+		StormBuilder.setBlock(mat, (x+1), (y+h-1), (z-2), loc, 1, -1, -1, true);//north east middle edge of cap(3rd layer down)
+		StormBuilder.setBlock(mat, (x+2), (y+h-1), (z+1), loc, 1, -1, 1, true);//south east middle edge of cap(3rd layer down)
+		StormBuilder.setBlock(mat, (x-2), (y+h-1), (z+1), loc, -1, -1, 1, true);//south west middle edge of cap(3rd layer down)
 		//###########
-		StormBuilder.setBlock(mat, (x-1), (y+h-1), (z+2), genLoc, -1, -1, 1, true);//south west middle edge of cap(3rd layer down)
-		StormBuilder.setBlock(mat, (x-1), (y+h-1), (z-2), genLoc, -1, -1, -1, true);//north west middle edge of cap(3rd layer down)
-		StormBuilder.setBlock(mat, (x+2), (y+h-1), (z-1), genLoc, 1, -1, -1, true);//north east middle edge of cap(3rd layer down)
-		StormBuilder.setBlock(mat, (x-2), (y+h-1), (z-1), genLoc, -1, -1, -1, true);//north west middle edge of cap(3rd layer down)
+		StormBuilder.setBlock(mat, (x-1), (y+h-1), (z+2), loc, -1, -1, 1, true);//south west middle edge of cap(3rd layer down)
+		StormBuilder.setBlock(mat, (x-1), (y+h-1), (z-2), loc, -1, -1, -1, true);//north west middle edge of cap(3rd layer down)
+		StormBuilder.setBlock(mat, (x+2), (y+h-1), (z-1), loc, 1, -1, -1, true);//north east middle edge of cap(3rd layer down)
+		StormBuilder.setBlock(mat, (x-2), (y+h-1), (z-1), loc, -1, -1, -1, true);//north west middle edge of cap(3rd layer down)
 		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-		StormBuilder.setBlock(mat, (x+1), (y+(Math.floor((h/2))-1)), (z), genLoc, 1, 0, 0, true);
-		StormBuilder.setBlock(mat, (x-1), (y+(Math.floor((h/2))-1)), (z), genLoc, -1, 0, 0, true);
-		StormBuilder.setBlock(mat, (x), (y+(Math.floor((h/2))-1)), (z+1), genLoc, 0, 0, 1, true);
-		StormBuilder.setBlock(mat, (x), (y+(Math.floor((h/2))-1)), (z-1), genLoc, 0, 0, -1, true);
+		StormBuilder.setBlock(mat, (x+1), (y+(Math.floor((h/2))-1)), (z), loc, 1, 0, 0, true);
+		StormBuilder.setBlock(mat, (x-1), (y+(Math.floor((h/2))-1)), (z), loc, -1, 0, 0, true);
+		StormBuilder.setBlock(mat, (x), (y+(Math.floor((h/2))-1)), (z+1), loc, 0, 0, 1, true);
+		StormBuilder.setBlock(mat, (x), (y+(Math.floor((h/2))-1)), (z-1), loc, 0, 0, -1, true);
 	}
-	private static void GenMushroomStem(Location genLoc, int h) {
+	public static void GenMushroomStem(Material mat, int x, int y, int z, int h, Location pos) {
+		Location genLoc = pos;
+		Location savLoc = pos;
 		int i = 0;
 		while (i < h) {
-			StormBuilder.setBlock(Material.MUSHROOM_STEM, x, (y+i), z, genLoc, 0, 2, 0, true);
-			genLoc.add(0, 1, 0).getBlock().setType(Material.MUSHROOM_STEM);
+			StormBuilder.setBlock(Material.MUSHROOM_STEM, x, (y+i), z, savLoc, 0, 2, 0, true);
+			//savLoc.add(0, 1, 0).getBlock().setType(Material.MUSHROOM_STEM);
 			i++;
 		}
 		if (i == h) {
-			StormBuilder.setBlock(Material.GLOWSTONE, x, (y+i), z, genLoc, 3, 3, 3, true);
+			StormBuilder.setBlock(Material.GLOWSTONE, x, (y+i), z, savLoc, 3, 3, 3, true);
 		}
 
 	}

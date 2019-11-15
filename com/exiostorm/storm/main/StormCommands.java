@@ -68,6 +68,15 @@ public class StormCommands implements CommandExecutor {
 			IlluminateShore.Scan(p.getServer().getPlayer(p.getName()).getTargetBlockExact(1000).getLocation().getBlock().getLocation());
 			return true;
 		}
+		if (cmd.getName().equalsIgnoreCase("cvbmush")) {
+			CommandSender p = (Player) sender;
+			if (!p.hasPermission("storm.cvbmush")) {
+				p.sendMessage("You must not be Storm! please elevate your permissions!");
+				return true;
+			}
+			MushroomConverter.convertBMush(p.getServer().getPlayer(p.getName()).getTargetBlockExact(1000).getLocation().getBlock().getLocation());
+			return true;
+		}
 		return true;
 	}
 }
